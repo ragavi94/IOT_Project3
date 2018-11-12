@@ -17,6 +17,7 @@ class Check_Stationary:
 		self.df = [float(i) for i in columns[0]]
 
 	def plot(self,x):
+		fig = plt.figure(1)
 		plt.plot(x)
 		plt.xlabel('x')
 		plt.savefig('./tsplot')
@@ -24,7 +25,7 @@ class Check_Stationary:
 
 	def check_stationary(self,x):
 		print("checking for stationary using Dickey-Fuller")
-		dftest = adfuller(x, autolag='AIC')
+		dftest = adfuller(x[:1500], autolag='AIC')
 		#print(dftest)
 		dfoutput = pd.Series(dftest[0:4], index=['Dickey-Fuller Test Statistics','p-value','#Lags Used','Number of Observations Used'])
 		for k,v in dftest[4].items():
